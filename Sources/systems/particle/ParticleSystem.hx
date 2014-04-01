@@ -36,8 +36,6 @@ class ParticleSystem
 	//Setup
 	var activeCount:Int = 0;
 	var image:Image;
-	var _x:Float = 0;
-	var _y:Float = 0;
 	
 	var running:Bool = false;
 	var _paused:Bool = false;
@@ -217,28 +215,26 @@ class ParticleSystem
 	
 	function get_x():Float 
 	{
-		return _x;
+		return pos.x;
 	}
 	
 	function set_x(value:Float):Float 
 	{
 		if (emitter != null) emitter.x = value;
-		pos.x = value;
-		return _x = value;
+		return pos.x = value;
 	}
 	
 	public var x(get_x, set_x):Float;
 	
 	function get_y():Float 
 	{
-		return _y;
+		return pos.y;
 	}
 	
 	function set_y(value:Float):Float 
 	{
 		if (emitter != null) emitter.y =  value;
-		pos.y = value;
-		return _y = value;
+		return pos.y = value;
 	}
 	
 	public var y(get_y, set_y):Float;
@@ -255,35 +251,7 @@ class ParticleSystem
 	
 	public var isPaused(get_isPaused, null):Bool;
 	public var activeParticles(get_activeParticles, null):Int;
-	//---------------------------------------------
-	public static function fadeOut(p:Particle) : Void
-	{
-		p.alpha = 1 - p.lifeTime / p.life;
-	}
-	
-	public static function fadeIn(p:Particle) : Void
-	{
-		p.alpha =  p.lifeTime / p.life;
-	}
-	
-	public static function gravity(p:Particle) : Void
-	{
-		p.vY += 250 * Time.deltaTime;
-	}
-	
-	public static function scaleDown(p:Particle) : Void
-	{
-		p.scale = 1 - p.lifeTime / p.life;
-	}
-	
-	public static function scaleUp(p:Particle) : Void
-	{
-		p.scale =  p.lifeTime / p.life * 2;
-	}
-	
-
-	
-	
+ 
 	
 }
 
