@@ -186,13 +186,7 @@ class IEmitter
 		p.color = Color.fromValue(0xFFFFFFFF);
 	}
 	
-	public function processParticle(p:Particle) : Void {
-		
-		p.lifeTime += Time.deltaTime;
-		p.x += p.vX * Time.deltaTime;
-		p.y += p.vY * Time.deltaTime;
-		p.rotation += p.rotationVel *  Time.deltaTime;
-	}
+	public function processParticle(p:Particle) : Void {}
 	
 }
 

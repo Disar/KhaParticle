@@ -83,22 +83,28 @@ class ParticleSystem
 		if (!running || _paused) return;
 		//-----------------------------
 		//Update emitter
+		var p:Particle;
 		
 		emitter.update(Time.deltaTime);
 		var i:Int = 0;
 		while (i < activeCount) {
 			
-			var p:Particle = particles[i];
+			p = particles[i];
 			
-			emitter.processParticle(p);
-			//Apply modifiers
-			for (i in 0...modifiers.length) modifiers[i].processParticle(p);
+			p.lifeTime += Time.deltaTime;
 			
-				
 			if (p.lifeTime > p.life) {
 				deactivateParticle(i);
-				i--; //set particle back
+				continue; //Dont i++;
 			}
+			
+			//Apply modifiers
+			for (i in 0...modifiers.length) modifiers[i].processParticle(p);
+			emitter.processParticle(p);
+			
+			p.x += p.vX * Time.deltaTime;
+			p.y += p.vY * Time.deltaTime;
+			p.rotation += p.rotationVel *  Time.deltaTime;
 			
 			i++;
 		}
