@@ -7,8 +7,8 @@ import util.Time;
  * ...
  * @author Sidar Talei
  */
-class GravityModfier implements IParticleModifier
-{
+class GravityModifier implements IParticleModifier
+{    
 	public var gravity:Vector2;
 	
 	
