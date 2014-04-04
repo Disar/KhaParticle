@@ -1,5 +1,5 @@
 package systems.particle.modifiers;
-import kha.Color;
+
 import systems.particle.IParticleModifier;
 import systems.particle.Particle;
 import util.Normalize;
@@ -18,7 +18,7 @@ class ColorModifier implements IParticleModifier
 {
 
 	
-	private static function interpolateColor(c1:Color, c2:Color, t:Float ) : Color
+	/*private static function interpolateColor(c1:Color, c2:Color, t:Float ) : Color
 	{
 		var cA:Int = Std.int(c1.Ab + (c2.Ab - c1.Ab) * t);
 		var cR:Int = Std.int(c1.Rb + (c2.Rb - c1.Rb) * t);
@@ -28,7 +28,7 @@ class ColorModifier implements IParticleModifier
 		var value:Int =  (cA << 24) | (cR << 16) | (cG << 8) | cB;
 		
 		return Color.fromValue(value);
-	}
+	}*/
 	
 	private static function  interpolateColorsCompact(a:Int, b:Int, t:Float):Int
 	{ 
@@ -45,12 +45,12 @@ class ColorModifier implements IParticleModifier
 
 	} 
 	
-	private var colors:Array<Color>;
+	private var colors:Array<Int>;
 	private var positions:Array<Float>;
 	
 	private var ratio:Float = 0;
-	private var startColor:Color;
-	private var endColor:Color;
+	private var startColor:Int;
+	private var endColor:Int;
 	private var startPos:Float;
 	private var endPos:Float;
 	
@@ -58,14 +58,14 @@ class ColorModifier implements IParticleModifier
 	
 	public function new(?transition:ColorTransition) 
 	{
-		colors = new Array<Color>();
+		colors = new Array<Int>();
 		positions = new Array<Float>();
 		transition == null ?  (this.transition = ColorTransition.NORMAL):(this.transition = transition);
 	}
 	
 	public function pushColor(c:Int, t:Float) : Void
 	{
-		colors.push(Color.fromValue(c));
+		colors.push(c);
 		positions.push(t);
 	}
 	
@@ -94,8 +94,8 @@ class ColorModifier implements IParticleModifier
 		}
 		
 		p.color.value = interpolateColorsCompact(
-			startColor.value,
-			endColor.value,
+			startColor,
+			endColor,
 			Normalize.normalize(startPos, endPos, ratio)
 		);
 	}
