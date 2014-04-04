@@ -157,7 +157,8 @@ class ParticleSystem
 			rotator.center.x = image.width* p.scale/2;
 			rotator.center.y = image.height* p.scale/2;
 			
-			if(p.color != null)painter.setColor(p.color);
+			//if(p.color != null)painter.setColor(p.color);
+			painter.setColor(p.color);
 			
 			painter.opacity = p.alpha;
 			

@@ -4,6 +4,7 @@ import kha.math.Vector3;
 import kha.scene.Spline;
 import systems.particle.IParticleModifier;
 import systems.particle.Particle;
+import util.Normalize;
 
 enum ScaleType {
 	SCALE_UP;
@@ -29,7 +30,7 @@ class ScaleModifier implements IParticleModifier
 	
 	private var value:Vector3;
 	
-	public function new(st:ScaleType, scalar:Float = 1, ?curve:Spline, minValue:Float=0,maxValue:Float=0) 
+	public function new(st:ScaleType, minValue:Float=0,maxValue:Float=1,scalar:Float = 1, ?curve:Spline) 
 	{
 		this.curve = curve;
 		type = st;
@@ -45,22 +46,23 @@ class ScaleModifier implements IParticleModifier
 		
 		
 		var ratio:Float = p.lifeTime / p.life;
+		
 		switch(type)
 		{
 			case ScaleType.SCALE_UP:
-				p.scale = ratio * scalar;
+				p.scale = Math.min(max,Math.max(min,ratio));
 			case ScaleType.SCALE_DOWN:
-				p.scale = (1 - ratio) * scalar;
+				p.scale = Math.min(max,Math.max(min,1 - ratio));
 			case ScaleType.SCALE_UP_DOWN:
 				if (ratio <= .5)
-				p.scale = ratio * scalar;
+				p.scale = ratio;
 				else
-				p.scale = (1 - ratio) * scalar;
+				p.scale = (1 - ratio);
 			case ScaleType.SCALE_DOWN_UP:
 				if (ratio >= .5)
-				p.scale = ratio * scalar;
+				p.scale = ratio;
 				else
-				p.scale = (1 - ratio) * scalar;
+				p.scale = (1 - ratio);
 			case ScaleType.CURVE:
 				value = curve.constantSpeedSpline(ratio);
 				value.y =  value.y > 1 ? 1:value.y;
@@ -68,6 +70,8 @@ class ScaleModifier implements IParticleModifier
 				p.scale = (value.y * (max - min)) + min ;
 			 
 		}
+		
+		p.scale *= scalar;
 	}
 	
 }

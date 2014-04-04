@@ -147,8 +147,7 @@ class IEmitter
 			catchUp = dt / ratio;
 			
 			pAmount = amountPerRate;
-			pAmount += Math.round(catchUp);
-			
+			pAmount += Math.ceil(catchUp);
 			//if (isSubEmitter)
 			//system.handleSubEmission(pAmount);
 			//else
