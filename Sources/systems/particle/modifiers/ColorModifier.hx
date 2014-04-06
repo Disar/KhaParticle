@@ -30,8 +30,7 @@ class ColorModifier implements IParticleModifier
 		return Color.fromValue(value);
 	}*/
 	
-	private static function  interpolateColorsCompact(a:Int, b:Int, t:Float):Int
-	{ 
+	private static function  interpolateColorsCompact(a:Int, b:Int, t:Float):Int{ 
 	   var MASK1:Int = 0xff00ff; 
 	   var MASK2:Int = 0x00ff00; 
 
@@ -56,35 +55,29 @@ class ColorModifier implements IParticleModifier
 	
 	public var transition:ColorTransition;
 	
-	public function new(?transition:ColorTransition) 
-	{
+	public function new(?transition:ColorTransition){
 		colors = new Array<Int>();
 		positions = new Array<Float>();
 		transition == null ?  (this.transition = ColorTransition.NORMAL):(this.transition = transition);
 	}
 	
-	public function pushColor(c:Int, t:Float) : Void
-	{
+	public function pushColor(c:Int, t:Float) : Void{
 		colors.push(c);
 		positions.push(t);
 	}
 	
-	public function popColor() : Void
-	{
+	public function popColor() : Void{
 		colors.pop();
 		positions.pop();
 	}
 	
 	/* INTERFACE systems.particle.IParticleModifier */
 	
-	public function processParticle(p:Particle):Void 
-	{
+	public function processParticle(p:Particle):Void{
 		ratio = (p.lifeTime / p.life);
 		
-		for (i in 0...colors.length-1)
-		{
-			if (ratio >= positions[i] &&  ratio <= positions[i + 1])
-			{
+		for (i in 0...colors.length-1){
+			if (ratio >= positions[i] &&  ratio <= positions[i + 1]){
 				startColor = colors[i];
 				endColor = colors[i + 1];
 				startPos = positions[i];

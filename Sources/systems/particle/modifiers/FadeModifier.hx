@@ -14,23 +14,19 @@ enum FadeType {
  * ...
  * @author Sidar Talei
  */
-class FadeModifier implements IParticleModifier
-{
+class FadeModifier implements IParticleModifier {
 
 	public var type:FadeType;
 	
-	public function new(ft:FadeType) 
-	{
+	public function new(ft:FadeType) {
 		 
 		type = ft;
 	}
 	
 	/* INTERFACE systems.particle.IParticleModifier */
 	
-	public function processParticle(p:Particle):Void 
-	{
-		switch(type)
-		{
+	public function processParticle(p:Particle):Void {
+		switch(type){
 			case FadeType.FADE_IN:
 				p.alpha = p.lifeTime / p.life;
 			case FadeType.FADE_OUT:
@@ -47,5 +43,4 @@ class FadeModifier implements IParticleModifier
 				p.alpha = 1 - p.lifeTime / p.life;
 		}
 	}
-	
 }

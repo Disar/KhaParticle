@@ -18,8 +18,7 @@ enum ScaleType {
  * ...
  * @author Sidar Talei
  */
-class ScaleModifier implements IParticleModifier
-{
+class ScaleModifier implements IParticleModifier {
 
 	public var type:ScaleType;
 	public var scalar:Float;
@@ -30,8 +29,7 @@ class ScaleModifier implements IParticleModifier
 	
 	private var value:Vector3;
 	
-	public function new(st:ScaleType, minValue:Float=0,maxValue:Float=1,scalar:Float = 1, ?curve:Spline) 
-	{
+	public function new(st:ScaleType, minValue:Float=0,maxValue:Float=1,scalar:Float = 1, ?curve:Spline) {
 		this.curve = curve;
 		type = st;
 		this.scalar = scalar;
@@ -41,14 +39,11 @@ class ScaleModifier implements IParticleModifier
 	
 	/* INTERFACE systems.particle.IParticleModifier */
 	
-	public function processParticle(p:Particle):Void 
-	{
-		
+	public function processParticle(p:Particle):Void {
 		
 		var ratio:Float = p.lifeTime / p.life;
 		
-		switch(type)
-		{
+		switch(type) {
 			case ScaleType.SCALE_UP:
 				p.scale = Math.min(max,Math.max(min,ratio));
 			case ScaleType.SCALE_DOWN:
@@ -70,7 +65,6 @@ class ScaleModifier implements IParticleModifier
 				p.scale = (value.y * (max - min)) + min ;
 			 
 		}
-		
 		p.scale *= scalar;
 	}
 	

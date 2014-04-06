@@ -13,15 +13,7 @@ import systems.particle.Particle;
  * @author Sidar Talei
  */
 
-enum EmitterType {
-	BOX;
-	RADIAL;
-}
-
- typedef ParticleModifier = Particle-> Void;
-
-class ParticleSystem
-{
+class ParticleSystem {
 	
 	private static var particleID:Int = 0;
 	
@@ -65,20 +57,17 @@ class ParticleSystem
 	//
 	var color:Color;
 	
-	public function new(maxParticles:Int, image:Image)  
-	{
+	public function new(maxParticles:Int, image:Image) {
 		particles = new Vector<Particle>(maxParticles);
 		this.maxParticles = maxParticles;
 		modifiers = new Array <IParticleModifier>();
 		this.image = image;
 		rotator = new Rotation(new Vector2(), 0);
-	
 		
 		pos = new Vector2();
 	}
 	
-	public function update() : Void
-	{
+	public function update() : Void{
 		
 		if (!running || _paused) return;
 		//-----------------------------
@@ -115,43 +104,37 @@ class ParticleSystem
 	 * Calls the emitter to emit the given amount of particles 
 	 * @param	n amount of particles to emit
 	 */
-	public function emit(n:Int) : Void
-	{
+	public function emit(n:Int) : Void {
 		if (emitter != null) emitter.emit(n);
 	}
 	
 	public function clear() : Void { while (modifiers.length != 0) modifiers.pop(); }
 	
-	public function start() : Void
-	{
+	public function start() : Void {
 		running = true;
 		_paused = false;
 	}
 	
-	public function stop() : Void
-	{
+	public function stop() : Void {
 		running = false;
 		activeCount = 0;
 	}
-	public function pause() : Void
-	{
+	
+	public function pause() : Void {
 		_paused  = !_paused;
 	}
 	
-	public function addModifier(m:IParticleModifier):Void 
-	{
+	public function addModifier(m:IParticleModifier):Void {
 		modifiers.push(m);
 	}
 	
-	public function render(painter:Painter) : Void
-	{
+	public function render(painter:Painter) : Void {
 		if (!running) return;
 		//-------------------------------
 		//Render particles:
 		
 		var p:Particle;
-		for (i in 0...activeCount)
-		{
+		for (i in 0...activeCount) {
 			
 			p = particles[i];
 			rotator.angle = p.rotation;
@@ -175,16 +158,13 @@ class ParticleSystem
 			image.height * p.scale,
 			rotator
 			);
-			
-			
 		}
 		
 		painter.opacity = 1;
 	}
 
 	
-	public function activateParticle() : Particle
-	{
+	public function activateParticle() : Particle {
 		if (activeCount + 1 > maxParticles) return null;
 		
 		var p:Particle = particles[activeCount];
@@ -199,8 +179,7 @@ class ParticleSystem
 		return p;
 	}
 	
-	private function deactivateParticle(i:Int) : Void
-	{
+	private function deactivateParticle(i:Int) : Void {
 		if (activeCount <= 0) return;
 		
 		var temp:Particle = particles[i];
@@ -214,46 +193,39 @@ class ParticleSystem
 		
 	}
 	
-	public function setEmitter(e:IEmitter) : Void
-	{
+	public function setEmitter(e:IEmitter) : Void {
 		emitter = e;
 		e.setSystem(this);
 	}
 	
 	
-	function get_x():Float 
-	{
+	function get_x():Float {
 		return pos.x;
 	}
 	
-	function set_x(value:Float):Float 
-	{
+	function set_x(value:Float):Float {
 		if (emitter != null) emitter.x = value;
 		return pos.x = value;
 	}
 	
 	public var x(get_x, set_x):Float;
 	
-	function get_y():Float 
-	{
+	function get_y():Float {
 		return pos.y;
 	}
 	
-	function set_y(value:Float):Float 
-	{
+	function set_y(value:Float):Float {
 		if (emitter != null) emitter.y =  value;
 		return pos.y = value;
 	}
 	
 	public var y(get_y, set_y):Float;
 	
-	function get_isPaused():Bool 
-	{
+	function get_isPaused():Bool {
 		return _paused;
 	}
 	
-	function get_activeParticles():Int
-	{
+	function get_activeParticles():Int {
 		return activeCount;
 	}
 	

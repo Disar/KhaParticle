@@ -13,8 +13,7 @@ enum BoxSide {
 	BOTTOM;
 }
  
-class BoxEmitter extends IEmitter
-{
+class BoxEmitter extends IEmitter {
 	public var side:BoxSide;
 	
 	public var width:Float;
@@ -23,8 +22,7 @@ class BoxEmitter extends IEmitter
 	private var halfWidth:Float;
 	private var halfHeight:Float;
 	
-	public function new(width:Float, height:Float,side:BoxSide) 
-	{
+	public function new(width:Float, height:Float,side:BoxSide) {
 		this.width = width;
 		this.height = height;
 		this.side = side;
@@ -33,12 +31,10 @@ class BoxEmitter extends IEmitter
 		super();
 	}
 	
-	override private function onParticleActivate(p:Particle):Void 
-	{
+	override private function onParticleActivate(p:Particle):Void {
 		super.onParticleActivate(p);
 		//Setup Particles
-		switch(side)
-		{
+		switch(side) {
 			case BoxSide.LEFT:
 				p.x = x - halfWidth;
 				p.y = (y - halfHeight) + Math.random() * (height + 1);

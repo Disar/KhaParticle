@@ -6,9 +6,7 @@ import systems.particle.Particle;
  * ...
  * @author Sidar Talei
  */
-class RadialEmitter extends IEmitter
-{
-
+class RadialEmitter extends IEmitter {
 	public var edgeSpawn:Bool = false;
 	public var radiusX:Float = 50;
 	public var radiusY:Float = 50;
@@ -16,32 +14,26 @@ class RadialEmitter extends IEmitter
 	
 	public var clamToEdge:Bool;
 	
-	public function new() 
-	{
+	public function new(){
 		super();
 		Random.init(16546456);
 	}
 	
-	public function setRadius(r:Float) : Void
-	{
+	public function setRadius(r:Float) : Void {
 		radiusX = radiusY = r;
 	}
 	
-	override private function onParticleActivate(p:Particle):Void 
-	{
-		
+	override private function onParticleActivate(p:Particle):Void {
 		super.onParticleActivate(p);
 		
-		if (edgeSpawn)
-		{
+		if (edgeSpawn){
 			 var a:Float = Math.random() * 361;
 			 
 			p.x = x + Math.cos(a * 180/Math.PI) * radiusX;
 			p.y = y + Math.sin(a * 180/Math.PI) * radiusY;
 			 
 		}
-		else if (!fromCenter)
-		{
+		else if (!fromCenter){
 			p.x = x + Math.cos(Math.random()*(Math.PI*2)) * (radiusX*Math.random());
 			p.y = y + Math.sin(Math.random()*(Math.PI*2)) * (radiusY*Math.random());
 		}
@@ -60,8 +52,7 @@ class RadialEmitter extends IEmitter
 		
 	}
 	
-	override public function processParticle(p:Particle):Void 
-	{
+	override public function processParticle(p:Particle):Void {
 		super.processParticle(p);
 		if (clamToEdge) {
 			

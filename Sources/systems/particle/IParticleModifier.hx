@@ -4,7 +4,6 @@ package systems.particle;
  * ...
  * @author Sidar Talei
  */
-interface IParticleModifier
-{
+interface IParticleModifier {
 	function processParticle(p:Particle): Void;
 }

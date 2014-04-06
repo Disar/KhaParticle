@@ -14,8 +14,7 @@ import kha.Scene;
 
 
  
-class IEmitter
-{
+class IEmitter{
 	
 	/** Emission rate*/
 	public var rate:Float;
@@ -97,31 +96,25 @@ class IEmitter
 		updateEmission(dt);
 	}
 	
-	public function setSystem(ps:ParticleSystem) : Void
-	{
+	public function setSystem(ps:ParticleSystem) : Void {
 		system = ps;
 	}
 	
-	public function addBurst(b:BurstProp) : Void
-	{
+	public function addBurst(b:BurstProp) : Void{
 		burstArray.push(b);
 	}
 	
 	private function updateEmission(dt:Float) : Void {
 		
-		
-		
 		durationCount += dt;
 		
-		if (durationCount > duration)
-		{
+		if (durationCount > duration){
 			if (!loop) return;
 			else durationCount = 0;
 		}
 		
 		//Update bursts
-		for (i in 0...burstArray.length)
-		{
+		for (i in 0...burstArray.length){
 			burstArray[i].timeCounter += dt;
 			if (burstArray[i].timeCounter > burstArray[i].time)
 			{
@@ -147,12 +140,14 @@ class IEmitter
 			catchUp = dt / ratio;
 			
 			pAmount = amountPerRate;
-			pAmount += Math.ceil(catchUp);
+			pAmount += Math.floor(catchUp);
+			
 			//if (isSubEmitter)
 			//system.handleSubEmission(pAmount);
 			//else
 			emit(pAmount);
 			counter = 0;
+			
 		}
 		
 
@@ -160,8 +155,7 @@ class IEmitter
 		
 	}
 	
-	public function emit(amount:Int) : Void
-	{
+	public function emit(amount:Int) : Void {
 		var p:Particle;
 		for (j in 0...amount) {
 			p = system.activateParticle();

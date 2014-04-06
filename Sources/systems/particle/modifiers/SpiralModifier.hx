@@ -9,8 +9,8 @@ import systems.particle.ParticleSystem;
  * ...
  * @author Sidar Talei
  */
-class SpiralModifier implements IParticleModifier
-{
+class SpiralModifier implements IParticleModifier {
+	
 	public var relative:Bool = false;
 	public var strength:Float = 200;
 	public var radialAcc:Float = -10;
@@ -21,8 +21,7 @@ class SpiralModifier implements IParticleModifier
 	private var r:Vector2;
 	private var v:Vector2;
 	
-	public function new(c:Vector2) 
-	{
+	public function new(c:Vector2){
 		center = c;
 		v = new Vector2();
 		r = new Vector2();
@@ -30,18 +29,14 @@ class SpiralModifier implements IParticleModifier
 	
 	/* INTERFACE systems.particle.IParticleModifier */
 	
-	public function processParticle(p:Particle):Void 
-	{
-	
-		
+	public function processParticle(p:Particle):Void {
 		if(relative){
 			v.x = p.sx - p.x;
 			v.y = p.sy - p.y;
 			if (v.x == 0) v.x = 0.1;
 			if (v.y == 0) v.y = 0.1;
 		}
-		else
-		{
+		else{
 			v.x = center.x - p.x;
 			v.y = center.y - p.y;
 		}
@@ -60,19 +55,16 @@ class SpiralModifier implements IParticleModifier
 				p.y = p.sy +  -(r.y * radialAcc)  + (v.x  * strength) * dt ;
 				
 			}
-			else
-			{
+			else{
 				p.x = center.x +  -(r.x * radialAcc)  + (-v.y * strength) * dt  ;
 				p.y =  center.y + -(r.y * radialAcc)  + (v.x  * strength) * dt  ;
 			}
 		}
 		else{
-			if (distanceBased)
-			{
+			if (distanceBased){
 				var m:Float = (l*distanceMultiplier);
-				p.vX +=  -(r.x * radialAcc + -v.y * strength)/m  * dt ;
-				p.vY +=  -(r.y * radialAcc + v.x  * strength)/m * dt   ;
-
+				p.vX +=  -(r.x * radialAcc + -v.y * strength) / m  * dt ;
+				p.vY +=  -(r.y * radialAcc + v.x  * strength) / m * dt ;
 			}
 			else
 			{
