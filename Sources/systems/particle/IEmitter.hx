@@ -1,11 +1,11 @@
 package systems.particle;
 import haxe.ds.Vector.Vector;
+import kha.Animation;
 import kha.Color;
 import kha.Configuration;
 import kha.math.Random;
 import kha.math.Vector2;
 import kha.Scene;
-import util.Time;
 
 /**
  * ...

@@ -1,7 +1,7 @@
 package systems.particle.modifiers;
 import kha.math.Vector2;
+import kha.Scheduler;
 import systems.particle.Particle;
-import util.Time;
 
 /**
  * ...
@@ -22,10 +22,8 @@ class GravityModifier implements IParticleModifier
 	
 	public function processParticle(p:Particle):Void 
 	{
-		p.vX += gravity.x * Time.deltaTime;
-		
-		p.vY += gravity.y  * Time.deltaTime;
-		 
+		p.vX += gravity.x * Scheduler.deltaTime;
+		p.vY += gravity.y * Scheduler.deltaTime;
 	}
 	
 }

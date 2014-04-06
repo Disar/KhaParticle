@@ -5,9 +5,9 @@ import kha.math.Vector2;
 import kha.Painter;
 import haxe.ds.Vector;
 import kha.Rotation;
+import kha.Scheduler;
 import systems.particle.Particle;
  
-import util.Time;
 /**
  * ...
  * @author Sidar Talei
@@ -84,14 +84,15 @@ class ParticleSystem
 		//-----------------------------
 		//Update emitter
 		var p:Particle;
-		
-		emitter.update(Time.deltaTime);
+		var dt:Float = Scheduler.deltaTime;
+		 
+		emitter.update(dt);
 		var i:Int = 0;
 		while (i < activeCount) {
 			
 			p = particles[i];
 			
-			p.lifeTime += Time.deltaTime;
+			p.lifeTime += Scheduler.deltaTime;
 			
 			if (p.lifeTime > p.life) {
 				deactivateParticle(i);
@@ -102,9 +103,9 @@ class ParticleSystem
 			for (i in 0...modifiers.length) modifiers[i].processParticle(p);
 			emitter.processParticle(p);
 			
-			p.x += p.vX * Time.deltaTime;
-			p.y += p.vY * Time.deltaTime;
-			p.rotation += p.rotationVel *  Time.deltaTime;
+			p.x += p.vX * dt;
+			p.y += p.vY * dt;
+			p.rotation += p.rotationVel * dt;
 			
 			i++;
 		}

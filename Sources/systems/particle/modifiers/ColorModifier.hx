@@ -38,7 +38,7 @@ class ColorModifier implements IParticleModifier
 	   var f2:Int = Std.int(256 * t);
 	   var f1:Int = 256 - f2;
 
-	   var c:Int =   ((((( a & MASK1 ) * f1 ) + ( ( b & MASK1 ) * f2 )) >> 8 ) & MASK1 ) 
+	   var c:Int = ((((( a & MASK1 ) * f1 ) + ( ( b & MASK1 ) * f2 )) >> 8 ) & MASK1 ) 
 			  | ((((( a & MASK2 ) * f1 ) + ( ( b & MASK2 ) * f2 )) >> 8 ) & MASK2 );
 		
 		return c;

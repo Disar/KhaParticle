@@ -1,9 +1,9 @@
 package systems.particle.modifiers;
 import kha.math.Vector2;
+import kha.Scheduler;
 import systems.particle.IParticleModifier;
 import systems.particle.Particle;
 import systems.particle.ParticleSystem;
-import util.Time;
 
 /**
  * ...
@@ -51,7 +51,7 @@ class SpiralModifier implements IParticleModifier
 		r.y = v.y;
 		
 		
-		var dt:Float = Time.deltaTime;
+		var dt:Float = Scheduler.deltaTime;
 		if (fixed) {
 			
 			if (relative) {
