@@ -73,6 +73,9 @@ class IEmitter{
 	* change.
 	* */
 	public var isSubEmitter:Bool = false;
+	
+	public var startingColor:Int = 0xFFFFFFFF;
+	
 	//public var maxScale:Float = 1; // [0-1]
 	//public var scaleVariation:Float = .5; // [0-1]
 	//----------------------------------------
@@ -176,7 +179,10 @@ class IEmitter{
 		p.scale = startScale;
 		
 		//p.color = Color.fromBytes(Std.int(Math.random() * 256), Std.int(Math.random() * 256), Std.int(Math.random() * 256));
-		p.color = Color.fromValue(0xFFFFFFFF);
+		if (p.color == null)
+		p.color = Color.fromValue(startingColor);
+		else
+		p.color.value = startingColor;
 	}
 	
 	public function processParticle(p:Particle) : Void {}

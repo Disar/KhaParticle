@@ -108,6 +108,35 @@ class ParticleSystem {
 		if (emitter != null) emitter.emit(n);
 	}
 	
+	/**
+	 * Emits the given amount of particles at the given x and y position.
+	 * @param	x postion on the x axis.
+	 * @param	y position on the y axis.
+	 * @param	amount the amount of particles to emit.
+	 * @param	color the particle color.
+	 * @param	reset jumps back to the position and color before they were modified.
+	 */
+	public function emitAt(x:Float, y:Float, amount:Int = 1, color:Int = 0xffffffff, reset:Bool = false) {
+		if (emitter == null)  return;
+		
+		var tx:Float = this.x;
+		var ty:Float = this.y;
+		var tc:Int = emitter.startingColor;
+		
+		this.x = x;
+		this.y = y;
+		emitter.startingColor = color;
+		
+		emitter.emit(amount);
+		
+		if (reset)
+		{
+			this.x = tx;
+			this.y = ty;
+			emitter.startingColor = tc;
+		}
+	}
+	
 	public function clear() : Void { while (modifiers.length != 0) modifiers.pop(); }
 	
 	public function start() : Void {
