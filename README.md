@@ -25,6 +25,9 @@ For now simply copy the files to your Source folder
 							//property of RadialEmitter
 	e.maxRotationVel = 10;	//Rotation speed.
 
+	p.setEmitter(e);
+	p.start();				//Start processing particles.
+
 Adding burst:
 -
 	var b:BurstProp = new BurstProp();
@@ -48,7 +51,7 @@ Adding modifiers:
 	//Add gravity 
 	p.addModifier(new GravityModfier(0,250)); // adds 250 to y over time
 
-	//Scale Up over life time. min,max,Multiplier 1.5;
+	//Scale Up over life time. min,max,Multiplier 1;
 	p.addModifier(new ScaleModifier(ScaleType.SCALE_DOWN, 0, 1, 1));
 
 - Modifiers can be used with multiple ParticleSystem objects
