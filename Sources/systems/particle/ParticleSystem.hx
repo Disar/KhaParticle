@@ -196,6 +196,8 @@ class ParticleSystem {
 	public function setEmitter(e:IEmitter) : Void {
 		emitter = e;
 		e.setSystem(this);
+		e.x = x;
+		e.y = y;
 	}
 	
 	
