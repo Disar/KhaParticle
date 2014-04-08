@@ -38,8 +38,8 @@ Adding modifiers:
 	//Add color change over life time
 	var c:ColorModifier = new ColorModifier();
 	//Color and position -> [0-1]
-	c.pushColor(Color.fromValue(0xFFFFFF00), 0);
-	c.pushColor(Color.fromValue(0xFFFF00FF), 1);
+	c.pushColor(0xFFFFFF00, 0);
+	c.pushColor(0xFFFF00FF, 1);
 	p.addModifier(c);
 
 	//Add Fader over life time
@@ -48,8 +48,8 @@ Adding modifiers:
 	//Add gravity 
 	p.addModifier(new GravityModfier(0,250)); // adds 250 to y over time
 
-	//Scale Up over life time. Multiplier 1.5;
-	p.addModifier(new ScaleModifier(ScaleType.SCALE_UP, 1.5));
+	//Scale Up over life time. min,max,Multiplier 1.5;
+	p.addModifier(new ScaleModifier(ScaleType.SCALE_DOWN, 0, 1, 1));
 
 - Modifiers can be used with multiple ParticleSystem objects
 
