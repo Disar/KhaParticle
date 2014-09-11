@@ -22,5 +22,5 @@ class Particle {
 	public var lifeTime:Float = 0;
 	public var rotation:Float = 0;
 	public var rotationVel:Float = 0;
-	public var color:Color;
+	public var color:Null<Color>;
 }

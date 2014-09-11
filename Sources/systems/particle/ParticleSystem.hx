@@ -1,8 +1,9 @@
 package systems.particle;
 import kha.Color;
+import kha.graphics2.Graphics;
 import kha.Image;
+import kha.math.Matrix3;
 import kha.math.Vector2;
-import kha.Painter;
 import haxe.ds.Vector;
 import kha.Rotation;
 import kha.Scheduler;
@@ -157,7 +158,7 @@ class ParticleSystem {
 		modifiers.push(m);
 	}
 	
-	public function render(painter:Painter) : Void {
+	public function render(g: Graphics) : Void {
 		if (!running) return;
 		//-------------------------------
 		//Render particles:
@@ -170,26 +171,17 @@ class ParticleSystem {
 			rotator.center.x = image.width* p.scale/2;
 			rotator.center.y = image.height* p.scale/2;
 			
-			//if(p.color != null)painter.setColor(p.color);
-			painter.setColor(p.color);
-			
-			painter.opacity = p.alpha;
-			
-			painter.drawImage2(
-			image,
-			emitter.imgSource.x,
-			emitter.imgSource.y,
-			image.width,
-			image.height, 
-			p.x - rotator.center.x, 
-			p.y - rotator.center.y, 
-			image.width * p.scale,
-			image.height * p.scale,
-			rotator
-			);
+			if (image != null)
+			{
+				if (p.color != null) g.color = p.color;
+				g.opacity = p.alpha;
+				if (rotator.angle != 0) g.pushTransformation(g.transformation * Matrix3.translation(rotator.center.x, y + rotator.center.y) * Matrix3.rotation(rotator.angle) * Matrix3.translation(-rotator.center.x, -rotator.center.y));
+				g.drawScaledSubImage(image, emitter.imgSource.x, emitter.imgSource.y, image.width, image.height, p.x - rotator.center.x, p.y - rotator.center.y, image.width * p.scale, image.height * p.scale);
+				if (rotator.angle != 0) g.popTransformation();
+			}
 		}
 		
-		painter.opacity = 1;
+		g.opacity = 1;
 	}
 
 	
